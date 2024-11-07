@@ -1,20 +1,20 @@
 import { Component, inject } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, InfiniteScrollCustomEvent, IonList, IonItem, IonAvatar, IonSkeletonText, IonAlert, IonLabel, IonBadge, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, InfiniteScrollCustomEvent, IonList, IonItem, IonAvatar, IonSkeletonText, IonAlert, IonLabel, IonBadge, IonInfiniteScroll, IonInfiniteScrollContent, IonText } from '@ionic/angular/standalone';
 import { MovieService } from '../services/movie.service';
 import { finalize, catchError } from 'rxjs';
 import { MovieResult } from '../services/interfaces';
 import { DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-home-defer',
+  templateUrl: './home-defer.page.html',
+  styleUrls: ['./home-defer.page.scss'],
   standalone: true,
-  imports: [IonInfiniteScrollContent, IonInfiniteScroll, IonBadge, RouterModule, DatePipe, IonLabel, IonAlert, IonSkeletonText, IonAvatar, IonItem, IonList, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonText, IonInfiniteScrollContent, IonInfiniteScroll, IonBadge, RouterModule, DatePipe, IonLabel, IonAlert, IonSkeletonText, IonAvatar, IonItem, IonList, IonHeader, IonToolbar, IonTitle, IonContent],
 })
-export class HomePage {
+export class HomeDeferPage {
+
   private movieService = inject(MovieService);
   private currentPage = 1;
   public error = null;
@@ -24,11 +24,9 @@ export class HomePage {
   public posterSize = 'w500';
   public dummyArray = new Array(5);
 
-
   constructor() {
     this.loadMovies();
   }
-
 
   loadMovies(event?: InfiniteScrollCustomEvent){
     this.error = null;
